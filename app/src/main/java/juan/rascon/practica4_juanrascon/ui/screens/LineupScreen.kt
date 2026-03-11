@@ -17,7 +17,7 @@ import juan.rascon.practica4_juanrascon.model.deutschland
 import juan.rascon.practica4_juanrascon.ui.components.SpielerCard
 
 @Composable
-fun LineupScreen(){
+fun LineupScreen(onSpielerClick: (Int) -> Unit){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -30,7 +30,8 @@ fun LineupScreen(){
         LazyColumn() {
         items(items= deutschland){
             spieler ->
-            SpielerCard(spieler)
+            SpielerCard(spieler = spieler,
+                onClick = {onSpielerClick(spieler.id)})
         }
         }
     }
@@ -39,5 +40,5 @@ fun LineupScreen(){
 @Preview(showBackground = true)
 @Composable
 fun LineupScreenPreview(){
-    LineupScreen()
+    LineupScreen({})
 }

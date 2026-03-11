@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import juan.rascon.practica4_juanrascon.ui.screens.DetailScreen
 import juan.rascon.practica4_juanrascon.ui.screens.LineupScreen
 import juan.rascon.practica4_juanrascon.ui.screens.LoginScreen
 
@@ -16,7 +17,18 @@ fun AppNavigation(){
             LoginScreen(onLoggingSucess = {navController.navigate(Routes.LINEUP_SCREEN)})
         }
         composable (Routes.LINEUP_SCREEN){
-            LineupScreen()
+            LineupScreen(
+                onSpielerClick = { spielerId ->
+                    navController.navigate("detail/$spielerId")
+                }
+            )
+        }
+        composable("detail/{spielerId}") { backStackEntry ->
+            val spielerId = backStackEntry.arguments?.getString("spielerId")?.toIntOrNull() ?: 0
+            DetailScreen(
+                spielerId = spielerId,
+                onBack = { navController.popBackStack() }
+            )
         }
     }
 }

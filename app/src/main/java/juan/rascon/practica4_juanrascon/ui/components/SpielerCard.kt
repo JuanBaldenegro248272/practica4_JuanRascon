@@ -20,13 +20,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.clickable
 import juan.rascon.practica4_juanrascon.model.Spieler
 
 @Composable
-fun SpielerCard(spieler: Spieler) {
+fun SpielerCard(spieler: Spieler,
+                onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
